@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Usuários do Sistema</title>
+	
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+	
+	<!-- Javascript -->
+	<script type="text/javascript" src="/media/js/dynamic.php?comments-page=examples%2Fstyling%2Fbootstrap5.html" async></script>
+	<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+	<script type="text/javascript" class="init">
+		$(document).ready(function(){
+			$('#connect-bracelet').DataTable();
+		    $('#phone').mask('(00) 00000-0000');
+		    $('#date').mask('00/00/0000');
+		    $('#hour').mask('00:00');
+		});
+	</script>
+</head>
+<body>
+
+	<div class="container">
+		<h1>System Worships</h1>
+		<h2>Details</h2>
+		<h5 th:text="|Date: ${worship.date}|"></h5>
+		<h5 th:text="|Hour: ${worship.hour}|"></h5>
+		<h5 th:text="|Status: ${worship.status}|"></h5>
+		<hr class="my-4">
+		<a class="btn btn-success" th:href="@{/worship/{id}/list-connect(id=${worship.id})}">Add Connect</a>
+		<table id="connect-bracelet" class="table table-striped" style="width:100%">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Birth Date</th>
+					<th>Responsible</th>
+					<th>Phone</th>
+					<th>Bracelet Number</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="connects : ${worship.connectBracelet}">
+					<td th:text="${connects.connect.name}"></td>
+					<td th:text="${connects.connect.birthDate}"></td>
+					<td th:text="${connects.connect.responsible}"></td>
+					<td th:text="${connects.connect.phone}"></td>
+					<td th:text="${connects.bracelet}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

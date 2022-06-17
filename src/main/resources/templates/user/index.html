@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Usuários do Sistema</title>
+	
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+	
+	<!-- Javascript -->
+	<script type="text/javascript" src="/media/js/dynamic.php?comments-page=examples%2Fstyling%2Fbootstrap5.html" async></script>
+	<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+	<script type="text/javascript" class="init">
+		$(document).ready(function () {
+		$('#users').DataTable();
+		});
+	</script>
+</head>
+<body>
+	<div class="container">
+		<h1>System Users</h1>
+		<div th:switch="${users}">
+			<p>
+				<a class="btn btn-primary" href="/user/signup">Add a new user</a>
+			</p>
+			<h2>List of Users</h2>
+			<h2 th:case="null">No users yet!</h2>
+			<div th:case="*">
+				<table id="users" class="table table-striped" style="width:100%">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Email</th>
+							<th>Phone</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="user : ${users}">
+							<td th:text="${user.name}"></td>
+							<td th:text="${user.email}"></td>
+							<td th:text="${user.phone}"></td>
+							<td><a class="btn btn-warning btn-sm" th:href="@{/user/edit/{id}(id=${user.id})}">Edit</a>  <a class="btn btn-danger btn-sm" th:href="@{/user/delete/{id}(id=${user.id})}">Delete</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
