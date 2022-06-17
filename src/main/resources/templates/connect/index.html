@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Usuários do Sistema</title>
+	<title>Connect Worship System</title>
 	
 	<!-- CSS -->
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
@@ -21,12 +21,25 @@
 </head>
 <body>
 	<div class="container">
-		<h1>System Connects</h1>
+		<h1 class="display-4">Connect Worship System</h1>
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			  <div class="container-fluid">
+			    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			      <div class="navbar-nav">
+			        <a class="nav-link" href="/home">Home</a>
+			        <a class="nav-link" href="/user/index">User</a>
+			        <a class="nav-link active" href="/connect/index">Connect</a>
+			        <a class="nav-link" href="/worship/index">Worship</a>
+			      </div>
+			    </div>
+			  </div>
+			</nav>
+			<hr class="my-4">
+			<p class="lead">System Connects List</p>
 		<div th:switch="${connects}">
 			<p>
 				<a class="btn btn-primary" href="/connect/signup">Add a new connect</a>
 			</p>
-			<h2>List of Connects</h2>
 			<h2 th:case="null">No connects yet!</h2>
 			<div th:case="*">
 				<table id="connects" class="table table-striped" style="width:100%">

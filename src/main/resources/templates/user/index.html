@@ -21,12 +21,25 @@
 </head>
 <body>
 	<div class="container">
-		<h1>System Users</h1>
+		<h1 class="display-4">Connect Worship System</h1>
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			  <div class="container-fluid">
+			    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			      <div class="navbar-nav">
+			        <a class="nav-link" href="/home">Home</a>
+			        <a class="nav-link active" href="/user/index">User</a>
+			        <a class="nav-link" href="/connect/index">Connect</a>
+			        <a class="nav-link" href="/worship/index">Worship</a>
+			      </div>
+			    </div>
+			  </div>
+			</nav>
+			<hr class="my-4">
+			<p class="lead">System User List</p>
 		<div th:switch="${users}">
 			<p>
 				<a class="btn btn-primary" href="/user/signup">Add a new user</a>
 			</p>
-			<h2>List of Users</h2>
 			<h2 th:case="null">No users yet!</h2>
 			<div th:case="*">
 				<table id="users" class="table table-striped" style="width:100%">
