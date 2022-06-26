@@ -19,6 +19,15 @@ public class ConnectController {
 	@Autowired
 	ConnectService connectService;
 	
+	@GetMapping("readCSV")
+	public String readCSV() {
+		if(connectService.readCsv()) {
+			return "Deu certo";
+		}else {
+			return "Deu errado";
+		}
+	}
+	
 	@GetMapping("signup")
     public String showSignUpForm(Connect connect) {
         return "connect/add-connect";

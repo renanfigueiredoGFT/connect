@@ -101,6 +101,12 @@ public class WorshipController {
 		return "redirect:/worship/details/" + worshipConnect.getWorshipId();
 	}
 	
+	@GetMapping("connect/delete/{idWorship}/{idConnect}")
+	public String deleteConnect(@PathVariable String idWorship, @PathVariable String idConnect, Model model){
+		worshipService.deleteConnect(idWorship,idConnect);
+		return "redirect:/worship/details/" + idWorship;
+	}
+	
 	@GetMapping("edit/{id}")
 	public String showUpdateForm(@PathVariable("id") String id, Model model) {
 	    Worship worship = worshipService.findById(id);

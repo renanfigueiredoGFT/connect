@@ -2,6 +2,7 @@ package com.lagoinha.connect.service;
 
 import java.util.List;
 
+import com.lagoinha.connect.model.ConnectBracelet;
 import com.lagoinha.connect.model.Worship;
 import com.lagoinha.connect.util.Criptografia;
 import com.mongodb.client.result.DeleteResult;
@@ -49,6 +50,26 @@ public class WorshipService {
 			return mongoTemplate.save(usuario, COLLECTION);
 		}
 		return null;
+	}
+
+	public Boolean deleteConnect(String idWorship, String idConnect) {
+		try {
+			Query query = new Query(Criteria.where("id").is(idWorship));
+			Worship worship = mongoTemplate.findOne(query, Worship.class);
+			List<ConnectBracelet> connectBracelets = worship.getConnectBracelet();
+			for(ConnectBracelet connectBracelet: connectBracelets) {
+				if(connectBracelet.getConnect().getId().equals(idConnect)) {
+					connectBracelets.remove(connectBracelet);
+					break;
+				}
+			}
+			worship.setConnectBracelet(connectBracelets);
+			mongoTemplate.save(worship, COLLECTION);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+		
 	}
 	
 }

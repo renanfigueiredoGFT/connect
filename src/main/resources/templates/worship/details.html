@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
+	<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Connect Worship System</title>
 	
 	<!-- CSS -->
@@ -60,6 +60,7 @@
 					<th>Responsible</th>
 					<th>Phone</th>
 					<th>Bracelet Number</th>
+					<th>Action</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -69,6 +70,7 @@
 					<td th:text="${connects.connect.responsible}"></td>
 					<td th:text="${connects.connect.phone}"></td>
 					<td th:text="${connects.bracelet}"></td>
+					<td><a class="btn btn-danger btn-sm" th:href="@{/worship/connect/delete/{idWorship}/{idConnect}(idWorship=${worship.id},idConnect=${connects.connect.id})}">Remove</a></td>
 				</tr>
 			</tbody>
 		</table>
