@@ -26,10 +26,14 @@
 		<h1 class="display-4">Connect Worship System</h1>
 			<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			  <div class="container-fluid">
-			    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+		    <a class="navbar-brand" href="#">Menu</a>
+			    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+			      <span class="navbar-toggler-icon"></span>
+			    </button>
+			    <div class="collapse navbar-collapse" id="navbarCollapse">
 			      <div class="navbar-nav">
-			        <a class="nav-link" href="/home">Home</a>
-			        <a class="nav-link active" href="/user/index">User</a>
+			        <a class="nav-link active" aria-current="page" href="/home">Home</a>
+			        <!-- <a class="nav-link" href="/user/index">User</a> -->
 			        <a class="nav-link" href="/connect/index">Connect</a>
 			        <a class="nav-link" href="/worship/index">Worship</a>
 			      </div>
@@ -59,7 +63,7 @@
 		    <br>
 		    <div class="form-group">
 		    	<input type="submit" class="btn btn-warning" value="Update User">
-		    	<a class="btn btn-primary" th:href="@{/user/index}">Voltar</a>  
+		    	<a class="btn btn-primary" th:href="@{/user/index}">Back</a>  
 			</div>
 		</form>
 	</div>
