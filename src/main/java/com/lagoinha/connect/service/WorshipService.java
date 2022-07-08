@@ -1,7 +1,9 @@
 package com.lagoinha.connect.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.lagoinha.connect.model.Connect;
 import com.lagoinha.connect.model.ConnectBracelet;
 import com.lagoinha.connect.model.Worship;
 import com.lagoinha.connect.util.Criptografia;
@@ -21,6 +23,9 @@ public class WorshipService {
 	
 	@Autowired
 	Criptografia criptografia;
+	
+	@Autowired
+	ConnectService connectService;
 	
 	private final static String COLLECTION = "worship";
 	
@@ -42,12 +47,36 @@ public class WorshipService {
 		return mongoTemplate.remove(query, Worship.class, COLLECTION);
 	}
 	
-	public Worship edit(Worship usuario) {
-		Query query  = new Query(Criteria.where("id").is(usuario.getId()));
-		Worship usuarioAuxiliar = mongoTemplate.findOne(query, Worship.class);
-		if(usuarioAuxiliar != null) {
+	public Worship edit(Worship worship) {
+		Query query  = new Query(Criteria.where("id").is(worship.getId()));
+		Worship worshipAux = mongoTemplate.findOne(query, Worship.class);
+		if(worshipAux != null) {
 			//usuario.setSenha(criptografia.criptografia(usuario.getSenha()));
-			return mongoTemplate.save(usuario, COLLECTION);
+			if(worshipAux.getConnectBracelet() != null && !worshipAux.getConnectBracelet().isEmpty()) {
+				worship.setConnectBracelet(worshipAux.getConnectBracelet());
+			}
+			return mongoTemplate.save(worship, COLLECTION);
+		}
+		return null;
+	}
+	
+	public Worship addToWorship(Worship worship, Connect connect, Integer bracelet) {
+		ConnectBracelet connectBracelet = new ConnectBracelet();
+		connectBracelet.setBracelet(bracelet);
+		connectBracelet.setConnect(connect);
+		List<ConnectBracelet> connectBracelets = worship.getConnectBracelet();
+		if(connectBracelets == null || connectBracelets.isEmpty()) {
+			List<ConnectBracelet> connectBraceletsEmpty = new ArrayList<>();
+			connectBraceletsEmpty.add(connectBracelet);
+			worship.setConnectBracelet(connectBraceletsEmpty);
+		}else {
+			connectBracelets.add(connectBracelet);
+		}
+		
+		Query query  = new Query(Criteria.where("id").is(worship.getId()));
+		Worship worshipAux = mongoTemplate.findOne(query, Worship.class);
+		if(worshipAux != null) {
+			return mongoTemplate.save(worship, COLLECTION);
 		}
 		return null;
 	}

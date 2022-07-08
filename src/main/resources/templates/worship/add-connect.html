@@ -45,9 +45,10 @@
 		</nav>
 	<hr class="my-4">
 	<p class="lead">Add Connect to Worship</p>
-	<h5 th:text="|Date: ${worship.date}|"></h5>
-	<h5 th:text="|Hour: ${worship.hour}|"></h5>
-	<h5 th:text="|Status: ${worship.status}|"></h5>
+	<h5 th:text="|Date: ${worship.date} ${worship.hour}|"></h5>
+	<h5 th:text="|Name: ${connect.name}|"></h5>
+	<h5 th:text="|Responsible: ${connect.responsible}|"></h5>
+	<hr class="my-4">
 	<form action="#" th:action="@{/worship/add-connect-worship}" th:object="${worshipConnect}" method="post">
 		<div class="form-group">
 			<label for="date">Bracelet Number</label>

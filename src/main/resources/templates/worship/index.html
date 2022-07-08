@@ -14,9 +14,20 @@
 	<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/plug-ins/1.12.1/sorting/date-uk.js"></script>
 	<script type="text/javascript" class="init">
 		$(document).ready(function () {
-		$('#worships').DataTable();
+		$('#worships').dataTable(
+		{
+			"aoColumns": [
+				{ "sType": "date-uk" },
+	            null,
+	            null,
+	            null
+	        ],
+	        "aaSorting": [ [ 0, "desc" ] ]
+		}		
+		);
 		});
 	</script>
 </head>
@@ -64,9 +75,8 @@
 							<td th:text="${worship.status}"></td>
 							<td>
 								<a class="btn btn-success btn-sm" th:href="@{/worship/details/{id}(id=${worship.id})}">Details</a> 
-								<a class="btn btn-warning btn-sm" th:href="@{/worship/edit/{id}(id=${worship.id})}">Edit</a>  
-<!-- 								<a class="btn btn-danger btn-sm" th:href="@{/worship/delete/{id}(id=${worship.id})}">Delete</a>   -->
-								
+								<a class="btn btn-warning btn-sm" th:href="@{/worship/edit/{id}(id=${worship.id})}">Edit</a>
+								<a class="btn btn-danger btn-sm" th:if="${worship.status == T(com.lagoinha.connect.model.Status).CLOSED}" th:href="@{/worship/delete/{id}(id=${worship.id})}">Delete</a>
 							</td>
 						</tr>
 					</tbody>
