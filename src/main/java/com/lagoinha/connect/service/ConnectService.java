@@ -1,5 +1,9 @@
 package com.lagoinha.connect.service;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.lagoinha.connect.model.Connect;
@@ -43,6 +47,31 @@ public class ConnectService {
 			return mongoTemplate.save(usuario, COLLECTION);
 		}
 		return null;
+	}
+	
+	public Boolean readCsv() {
+		try {
+			BufferedReader br = new BufferedReader(new FileReader("banco_connect.csv"));
+			String line;
+			while ((line = br.readLine()) != null) {
+				try {
+					String[] values = line.split(";");
+					Connect connect = new Connect();
+					connect.setName(values[0]);
+					connect.setBirthDate(values[1]);
+					connect.setResponsible(values[2]);
+					connect.setPhone(values[3]);
+					System.out.println(values[0]);
+					mongoTemplate.save(connect, COLLECTION);
+				} catch (Exception e) {
+					System.out.println("Erro na linha: "+line);
+				}
+			}
+			br.close();
+			return true;
+		} catch (Exception e) {
+			return false;
+		} 
 	}
 	
 }

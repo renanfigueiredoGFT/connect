@@ -84,21 +84,14 @@ public class WorshipController {
 		Worship worship = worshipService.findById(worshipConnect.getWorshipId());
 		Connect connect = connectService.findById(worshipConnect.getConnectId());
 		Integer bracelet = worshipConnect.getBraceletNumber();
-		ConnectBracelet connectBracelet = new ConnectBracelet();
-		connectBracelet.setBracelet(bracelet);
-		connectBracelet.setConnect(connect);
-		List<ConnectBracelet> connectBracelets = worship.getConnectBracelet();
-		if(connectBracelets == null || connectBracelets.isEmpty()) {
-			List<ConnectBracelet> connectBraceletsEmpty = new ArrayList<>();
-			connectBraceletsEmpty.add(connectBracelet);
-			worship.setConnectBracelet(connectBraceletsEmpty);
-		}else {
-			connectBracelets.add(connectBracelet);
-		}
-		
-		worshipService.edit(worship);
-		
+		worshipService.addToWorship(worship, connect, bracelet);
 		return "redirect:/worship/details/" + worshipConnect.getWorshipId();
+	}
+	
+	@GetMapping("connect/delete/{idWorship}/{idConnect}")
+	public String deleteConnect(@PathVariable String idWorship, @PathVariable String idConnect, Model model){
+		worshipService.deleteConnect(idWorship,idConnect);
+		return "redirect:/worship/details/" + idWorship;
 	}
 	
 	@GetMapping("edit/{id}")
