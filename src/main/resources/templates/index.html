@@ -2,11 +2,17 @@
 <html>
 <head>
 	<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Connect Worship System</title>
+	<title>Connect</title>
 	
 	<!-- CSS -->
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+	<style type="text/css">
+		.image {
+    		max-height:50px;
+    		height: auto;
+		}
+	</style>
 	
 	<!-- Javascript -->
 	<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -17,7 +23,7 @@
 <body>
 	<div class="container">
 		<div>
-			<h1 class="display-4">Connect Worship System</h1>
+			<h1 class="display-4"><img class="image" th:src="@{img/logo_connect.png}"/> CONNECT</h1>
 			<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			  <div class="container-fluid">
 		    <a class="navbar-brand" href="#">Menu</a>
@@ -26,16 +32,16 @@
 			    </button>
 			    <div class="collapse navbar-collapse" id="navbarCollapse">
 			      <div class="navbar-nav">
-			        <a class="nav-link active" aria-current="page" href="/home">Home</a>
+			        <a class="nav-link active" aria-current="page" href="/home">Início</a>
 			        <!-- <a class="nav-link" href="/user/index">User</a> -->
 			        <a class="nav-link" href="/connect/index">Connect</a>
-			        <a class="nav-link" href="/worship/index">Worship</a>
+			        <a class="nav-link" href="/worship/index">Cultos</a>
 			      </div>
 			    </div>
 			  </div>
 			</nav>
 			<hr class="my-4">
-			<p class="lead">Hello, welcome to the Connect Worship System.</p>
+			<p class="lead">Olá, Bem Vindo ao Sistema do Connect!</p>
 <!-- 			<div class="card"> -->
 <!-- 				<h4 class="card-header">User</h4> -->
 <!-- 				<div class="card-body"> -->
@@ -48,20 +54,29 @@
 			<div class="card">
 				<h4 class="card-header">Connect</h4>
 				<div class="card-body">
-					<h5 class="card-title">Connect registration</h5>
-					<p class="card-text">Insert, change or delete a system connect.</p>
+					<h5 class="card-title">Cadastro de Connects</h5>
+					<p class="card-text">Listar, cadastrar, editar ou deletar connects.</p>
 					<a href="/connect/index" class="btn btn-primary">Enter</a>
 			  	</div>
 			</div>
 			<br>
 			<div class="card">
-				<h4 class="card-header">Worship</h4>
+				<h4 class="card-header">Cultos</h4>
 				<div class="card-body">
-					<h5 class="card-title">Worship Management</h5>
-			    	<p class="card-text">Manage cults, registering, editing and deleting. In addition to being able to add connects to them.</p>
+					<h5 class="card-title">Gestão de Cultos</h5>
+			    	<p class="card-text">Inserir os connects em um determinado culto.</p>
 			    	<a href="/worship/index" class="btn btn-primary">Enter</a>
 				</div>
 			</div>
+			<br>
+<!-- 			<div class="card"> -->
+<!-- 				<h4 class="card-header">Voluntários</h4> -->
+<!-- 				<div class="card-body"> -->
+<!-- 					<h5 class="card-title">Gestão de Voluntários</h5> -->
+<!-- 			    	<p class="card-text">Listar, cadastrar, editar e deletar voluntários de um culto.</p> -->
+<!-- 			    	<a href="/worship/index" class="btn btn-primary">Enter</a> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
 		</div>
 	</div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
