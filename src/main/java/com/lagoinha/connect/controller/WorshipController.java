@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.lagoinha.connect.model.Connect;
 import com.lagoinha.connect.model.ConnectBracelet;
+import com.lagoinha.connect.model.ConnectVisitor;
 import com.lagoinha.connect.model.Worship;
 import com.lagoinha.connect.model.WorshipConnect;
 import com.lagoinha.connect.service.ConnectService;
@@ -86,6 +87,32 @@ public class WorshipController {
 		Integer bracelet = worshipConnect.getBraceletNumber();
 		worshipService.addToWorship(worship, connect, bracelet);
 		return "redirect:/worship/details/" + worshipConnect.getWorshipId();
+	}
+	
+	@GetMapping("{idWorship}/add-connect-visitor")
+    public String insertConnectVisitor(@PathVariable("idWorship") String idWorship, Model model) {
+	    Worship worship = worshipService.findById(idWorship);
+	    model.addAttribute("worship", worship);
+	    model.addAttribute("connectVisitor", new ConnectVisitor());
+	    return "worship/add-connect-visitor";
+    }
+	
+	@PostMapping("add-connect-visitor-worship")
+	public String save(@ModelAttribute ConnectVisitor connectVisitor, BindingResult result, Model model){
+		
+		//Transformar o form no Connect para salvar no banco de dados;
+		Connect connect = new Connect();
+		connect.setName(connectVisitor.getName());
+		connect.setBirthDate(connectVisitor.getBirthDate());
+		connect.setPhone(connectVisitor.getPhone());
+		connect.setResponsible(connectVisitor.getResponsible());
+		
+		Connect connectSaved = connectService.save(connect);
+		
+		Worship worship = worshipService.findById(connectVisitor.getIdWorship());
+		worshipService.addToWorship(worship, connectSaved, connectVisitor.getBraceletNumber());
+		
+		return "redirect:/worship/details/" + connectVisitor.getIdWorship();
 	}
 	
 	@GetMapping("connect/delete/{idWorship}/{idConnect}")
