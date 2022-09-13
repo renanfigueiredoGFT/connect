@@ -69,7 +69,8 @@
 		<h5 th:text="|Hora: ${worship.hour}|"></h5>
 		<h5 th:text="|Status: ${worship.status}|"></h5>
 		<hr class="my-4">
-		<a class="btn btn-success" th:href="@{/worship/{id}/list-connect(id=${worship.id})}">Adicionar um Connect</a>
+		<a class="btn btn-success" th:href="@{/worship/{id}/list-connect(id=${worship.id})}">Adicionar Connect Cadastrado</a>
+		<a class="btn btn-warning" th:href="@{/worship/{id}/add-connect-visitor(id=${worship.id})}">Adicionar Connect Visitante</a>
 		<a class="btn btn-danger" th:href="@{/worship/index}">Voltar</a>
 		<br>
 		<br>
