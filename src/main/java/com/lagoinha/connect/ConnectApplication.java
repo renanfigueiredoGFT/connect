@@ -20,7 +20,7 @@ public class ConnectApplication {
 	
 	@Bean
 	public Docket postsApi() {
-		return new Docket(DocumentationType.OAS_30)
+		return new Docket(DocumentationType.SWAGGER_2)
 				.apiInfo(new ApiInfoBuilder()
 			            .title("Envio de Certificado Start")
 			            .description("Software de envio de certificado da Lagoinha Niterói")

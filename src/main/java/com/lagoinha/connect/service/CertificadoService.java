@@ -13,18 +13,32 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 import com.lagoinha.connect.model.Aluno;
+import com.lagoinha.connect.model.Connect;
+import com.lagoinha.connect.model.Email;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.HtmlEmail;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.xhtmlrenderer.simple.Graphics2DRenderer;
 
 @Service
 public class CertificadoService {
+	
+	@Autowired
+	MongoTemplate mongoTemplate;
+	
+	private final static String COLLECTION = "email";
+	private final static String ID = "6399ba84db3302078d4c3224";
+	
+	private Email email() {
+		return mongoTemplate.findById(ID, Email.class, COLLECTION);
+	}
 
 	public List<Aluno> testarPlanilha(MultipartFile multipartFile) {
 
@@ -82,7 +96,7 @@ public class CertificadoService {
 	public File criarHtml(Aluno aluno, Integer matricula, Integer ano) {
 
 		String texto = aluno.getNome();
-		String nomeArquivo = "src/certificados/" + matricula + ".html";
+		String nomeArquivo = matricula + ".html";
 		String turma = ano.toString();
 		String html = "<html> <head> <style>body{width: 1457px; height: 1017px; background-image: url('certificado_start.png'); background-repeat: no-repeat;}#nome{margin-top: 37.5%; margin-left: 30%; font-family: Helvetica, sans-serif; font-size:40px; font-weight: 600;}#turma{margin-top: 10%; margin-left: 45%; font-family: Helvetica, sans-serif; font-size:40px; font-weight: 600;}</style> </head> <body> <p id=\"nome\">${texto}</p><p id=\"turma\">${turma}</p></body></html>";
 		html = html.replace("${texto}", texto);
@@ -115,7 +129,7 @@ public class CertificadoService {
 		html = html.replace("${turma}", turma);
 		try {
 			// gerar imagem
-			String imageFilePath = "src/certificados/" + nomeImagem + ".png";
+			String imageFilePath = nomeImagem + ".png";
 			int WIDTH = 1457;
 			int HEIGHT = 1017;
 			String IMAGE_FORMAT = "png";
@@ -143,13 +157,15 @@ public class CertificadoService {
 
 	public void sendEmail(Aluno aluno, Integer matricula, Integer ano) {
 
-		String meuEmail = "renan.figueiredo.05@gmail.com";
-		String senha = "xsmtpsib-b937c77d8cffc635666984bbe9bac212dadc45bb21eabad8faccc53300078b0c-SCZUx7aOGJKDy3fX";
+		Email emailConfig = email();
+		
+		String meuEmail = emailConfig.getEmail();
+		String senha = emailConfig.getSenha();
 		String subject = "CERTIFICADO START - " + aluno.getNome();
 
 		try {
 			HtmlEmail email = new HtmlEmail();
-			email.setHostName("smtp-relay.sendinblue.com");
+			email.setHostName(emailConfig.getSmtp());
 			email.setSmtpPort(587);
 			email.setAuthenticator(new DefaultAuthenticator(meuEmail, senha));
 			email.setSSLOnConnect(true);
