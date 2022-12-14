@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import io.swagger.annotations.Api;
+
+@Api(tags = "Certificado")
 @RestController
 @RequestMapping("certificado")
 public class CertificadoController {
@@ -24,18 +27,19 @@ public class CertificadoController {
 	CertificadoService certificadoService;
 	
 	@CrossOrigin
-	@RequestMapping(path = "/testar-planilha", method = RequestMethod.POST, consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
-	public ResponseEntity<?> testarPlanilha(@RequestPart MultipartFile planilha){
+	@RequestMapping(path = "/enviar-email-teste", method = RequestMethod.POST, consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
+	public ResponseEntity<?> testarEnvio(@RequestPart MultipartFile planilha){
 		return ResponseEntity.ok(certificadoService.testarPlanilha(planilha));
 	}
 	
-	@PostMapping("importar-planilha")
-	public ResponseEntity<?> importarPlanilha(){
-		return ResponseEntity.ok(certificadoService.importarPlanilha());
+	@CrossOrigin
+	@RequestMapping(path = "/enviar-email-arquivo", method = RequestMethod.POST, consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
+	public ResponseEntity<?> enviarEmailArquivo(@RequestPart MultipartFile planilha){
+		return ResponseEntity.ok(certificadoService.importarPlanilha(planilha));
 	}
 	
-	@PostMapping("enviar-email")
-	public ResponseEntity<?> criarEmail(Aluno aluno){
+	@PostMapping("enviar-email-individual")
+	public ResponseEntity<?> enviarEmailIndividual(Aluno aluno){
 		certificadoService.sendEmail(aluno, 1, LocalDate.now().getYear());
 		return ResponseEntity.ok("Email enviado com sucesso!");
 		

@@ -3,13 +3,9 @@ package com.lagoinha.connect.service;
 import java.awt.image.BufferedImage;
 import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.nio.file.Files;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,9 +30,8 @@ public class CertificadoService {
 
 		List<Aluno> alunos = new ArrayList<>();
 		try {
-			File file = convertToFile(multipartFile);
-			FileReader filereader = new FileReader(file);
-			CSVReader csvReader = new CSVReaderBuilder(filereader).build();
+			Reader reader = new InputStreamReader(multipartFile.getInputStream());
+			CSVReader csvReader = new CSVReaderBuilder(reader).build();
 			List<String[]> allData = csvReader.readAll();
 			int linha = 1;
 			for (String[] row : allData) {
@@ -51,27 +46,18 @@ public class CertificadoService {
 					linha++;
 				}
 			}
-			filereader.close();
-			csvReader.close();
-			deleteTree(file);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return alunos;
 	}
 
-	public List<Aluno> importarPlanilha() {
+	public List<Aluno> importarPlanilha(MultipartFile multipartFile) {
 
 		List<Aluno> alunos = new ArrayList<>();
 		try {
-			File file = new File("src/planilhas/start2.csv");
-			FileReader filereader = new FileReader(file);
-			CSVReader csvReader = new CSVReaderBuilder(filereader).build();
+			Reader reader = new InputStreamReader(multipartFile.getInputStream());
+			CSVReader csvReader = new CSVReaderBuilder(reader).build();
 			List<String[]> allData = csvReader.readAll();
 			int linha = 1;
 			for (String[] row : allData) {
@@ -87,14 +73,9 @@ public class CertificadoService {
 					linha++;
 				}
 			}
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return alunos;
 	}
 
@@ -198,38 +179,6 @@ public class CertificadoService {
 			System.out.println("Email enviado com sucesso!");
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-	}
-
-	private File convertToFile(MultipartFile multipartFile) {
-		try {
-			InputStream initialStream = multipartFile.getInputStream();
-			byte[] buffer = new byte[initialStream.available()];
-			initialStream.read(buffer);
-			File tmpFile = new File("src/main/resources/tmp/tmpFile.tmp");
-			try (OutputStream outStream = new FileOutputStream(tmpFile)) {
-				outStream.write(buffer);
-			}
-			return tmpFile;
-
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	private void deleteTree(File inFile) {
-		if (inFile.isFile()) {
-			try {
-				Files.deleteIfExists(inFile.toPath());
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} else {
-			File files[] = inFile.listFiles();
-			for (int i = 0; i < files.length; i++) {
-				deleteTree(files[i]);
-			}
 		}
 	}
 
