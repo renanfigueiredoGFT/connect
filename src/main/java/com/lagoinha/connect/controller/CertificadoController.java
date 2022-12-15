@@ -27,15 +27,27 @@ public class CertificadoController {
 	CertificadoService certificadoService;
 	
 	@CrossOrigin
-	@RequestMapping(path = "/enviar-email-teste", method = RequestMethod.POST, consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
-	public ResponseEntity<?> testarEnvio(@RequestPart MultipartFile planilha){
-		return ResponseEntity.ok(certificadoService.testarPlanilha(planilha));
+	@RequestMapping(path = "/teste-csv", method = RequestMethod.POST, consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
+	public ResponseEntity<?> testarEnvioCSV(@RequestPart MultipartFile planilha){
+		return ResponseEntity.ok(certificadoService.testarPlanilhaCSV(planilha));
 	}
 	
 	@CrossOrigin
-	@RequestMapping(path = "/enviar-email-arquivo", method = RequestMethod.POST, consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
-	public ResponseEntity<?> enviarEmailArquivo(@RequestPart MultipartFile planilha){
-		return ResponseEntity.ok(certificadoService.importarPlanilha(planilha));
+	@RequestMapping(path = "/teste-excel", method = RequestMethod.POST, consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
+	public ResponseEntity<?> testarEnvioExcel(@RequestPart MultipartFile planilha){
+		return ResponseEntity.ok(certificadoService.testarPlanilhaExcel(planilha));
+	}
+	
+	@CrossOrigin
+	@RequestMapping(path = "/enviar-email-csv", method = RequestMethod.POST, consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
+	public ResponseEntity<?> enviarEmailCSV(@RequestPart MultipartFile planilha){
+		return ResponseEntity.ok(certificadoService.importarPlanilhaCSV(planilha));
+	}
+	
+	@CrossOrigin
+	@RequestMapping(path = "/enviar-email-excel", method = RequestMethod.POST, consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
+	public ResponseEntity<?> enviarEmailExcel(@RequestPart MultipartFile planilha){
+		return ResponseEntity.ok(certificadoService.importarPlanilhaExcel(planilha));
 	}
 	
 	@PostMapping("enviar-email-individual")
