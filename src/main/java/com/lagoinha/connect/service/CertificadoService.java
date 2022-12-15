@@ -22,7 +22,6 @@ import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.HtmlEmail;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -46,19 +45,11 @@ public class CertificadoService {
 	}
 
 	private Boolean validaLinha(Row row) {
-		DataFormatter formatter = new DataFormatter();
-		StringBuffer text = new StringBuffer();
+		String text = "";
 		for (Cell cell : row) {
-			if (!text.isEmpty()) {
-				text.append(", ");
-			}
-			text.append(formatter.formatCellValue(cell));
+			text= text + cell.getStringCellValue();
 		}
-
-		// TODO Do something useful with the string
-		String rowAsText = text.toString();
-
-		if (rowAsText.contains("@")) {
+		if (text.contains("@")) {
 			return true;
 		}
 		return false;
