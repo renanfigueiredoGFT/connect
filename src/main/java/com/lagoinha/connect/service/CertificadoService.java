@@ -13,8 +13,8 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-import com.lagoinha.connect.model.Aluno;
-import com.lagoinha.connect.model.Email;
+import com.lagoinha.connect.model.start.Aluno;
+import com.lagoinha.connect.model.start.Email;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 

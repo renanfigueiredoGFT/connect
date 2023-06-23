@@ -2,7 +2,7 @@ package com.lagoinha.connect.controller;
 
 import java.time.LocalDate;
 
-import com.lagoinha.connect.model.Aluno;
+import com.lagoinha.connect.model.start.Aluno;
 import com.lagoinha.connect.service.CertificadoService;
 
 import org.springframework.beans.factory.annotation.Autowired;

@@ -22,14 +22,13 @@ public class ConnectApplication {
 	public Docket postsApi() {
 		return new Docket(DocumentationType.SWAGGER_2)
 				.apiInfo(new ApiInfoBuilder()
-			            .title("Envio de Certificado Start")
-			            .description("Software de envio de certificado da Lagoinha Niterói")
+			            .title("APIs do Connect")
+			            .description("Software do Connect da Lagoinha Niterói")
 			            .version("1.0")
 			            .license("MIT")
 			            .licenseUrl("https://opensource.org/licenses/MIT")
 			            .build())
-			        .tags(new Tag("Certificado", "Envio dos Certificados do Start"))
-			        .select().apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
+			        .select()
 			        .build();
 
 	}

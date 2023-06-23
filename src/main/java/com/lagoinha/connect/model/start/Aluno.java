@@ -1,4 +1,4 @@
-package com.lagoinha.connect.model;
+package com.lagoinha.connect.model.start;
 
 public class Aluno {
 

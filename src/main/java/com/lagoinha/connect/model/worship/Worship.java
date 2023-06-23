@@ -1,4 +1,4 @@
-package com.lagoinha.connect.model;
+package com.lagoinha.connect.model.worship;
 
 import java.util.List;
 
@@ -43,6 +43,13 @@ public class Worship {
 	public void setConnectBracelet(List<ConnectBracelet> connectBracelet) {
 		this.connectBracelet = connectBracelet;
 	}
+	
+	@Override
+	public String toString() {
+		return "Worship [id=" + id + ", date=" + date + ", hour=" + hour + ", status=" + status + ", connectBracelet="
+				+ connectBracelet + "]";
+	}
+	
 	
 	
 	

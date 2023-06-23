@@ -24,11 +24,10 @@
 	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/plug-ins/1.12.1/filtering/type-based/accent-neutralise.js"></script>
 	<script type="text/javascript" class="init">
 		$(document).ready(function () {
-		$('#worships').dataTable(
+		$('#escalas').dataTable(
 		{
 			"aoColumns": [
 				{ "sType": "date-uk" },
-	            null,
 	            null,
 	            null
 	        ],
@@ -55,41 +54,38 @@
 			        <a class="nav-link" aria-current="page" href="/home">Início</a>
 			        <!-- <a class="nav-link" href="/user/index">User</a> -->
 			        <a class="nav-link" href="/connect/index">Connect</a>
-			        <a class="nav-link active" href="/worship/index">Cultos</a>
+			        <a class="nav-link" href="/worship/index">Cultos</a>
 			        <a class="nav-link" href="/voluntario/index">Voluntários</a>
 			        <a class="nav-link" href="/ministerio/index">Ministérios</a>
-			        <a class="nav-link" href="/escala/index">Escalas</a>
+			        <a class="nav-link active" href="/escala/index">Escalas</a>
 			      </div>
 			    </div>
 			  </div>
 			</nav>
 		<hr class="my-4">
-		<p class="lead">Lista de Cultos</p>
-		<div th:switch="${worships}">
+		<p class="lead">Lista de Escalas</p>
+		<div th:switch="${escalas}">
 			<p>
-				<a class="btn btn-primary" href="/worship/signup">Criar um novo Culto</a>
-				<a class="btn btn-danger" href="/worship/closeAll">Encerrar Cultos Abertos</a>
+				<a class="btn btn-primary" href="/escala/signup">Criar nova Escala</a>
 			</p>
-			<h2 th:case="null">No worships yet!</h2>
+			<h2 th:case="null">Sem escalas no momento</h2>
 			<div th:case="*">
-				<table id="worships" class="table table-striped" style="width:100%">
+				<table id="escalas" class="table table-striped" style="width:100%">
 					<thead>
 						<tr>
 							<th>Data</th>
 							<th>Hora</th>
-							<th>Status</th>
 							<th>Ações</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="worship : ${worships}">
-							<td th:text="${worship.date}"></td>
-							<td th:text="${worship.hour}"></td>
-							<td th:text="${worship.status}"></td>
+						<tr th:each="escala : ${escalas}">
+							<td th:text="${escala.culto.date}"></td>
+							<td th:text="${escala.culto.hour}"></td>
 							<td>
-								<a class="btn btn-success btn-sm" th:href="@{/worship/details/{id}(id=${worship.id})}">Detalhes</a> 
-								<a class="btn btn-warning btn-sm" th:href="@{/worship/edit/{id}(id=${worship.id})}">Editar Cadastro</a>
-								<a class="btn btn-danger btn-sm" th:if="${worship.status == T(com.lagoinha.connect.model.worship.Status).EXCLUIR}" th:href="@{/worship/delete/{id}(id=${worship.id})}">Excluir Culto</a>
+								<a class="btn btn-success btn-sm" th:href="@{/escala/details/{id}(id=${escala.id})}">Detalhes</a> 
+								<a class="btn btn-warning btn-sm" th:href="@{/escala/edit/{id}(id=${escala.id})}">Editar</a>
+								<a class="btn btn-danger btn-sm" th:href="@{/escala/delete/{id}(id=${escala.id})}">Excluir</a>
 							</td>
 						</tr>
 					</tbody>

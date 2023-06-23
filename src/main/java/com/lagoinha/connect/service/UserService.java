@@ -2,7 +2,7 @@ package com.lagoinha.connect.service;
 
 import java.util.List;
 
-import com.lagoinha.connect.model.User;
+import com.lagoinha.connect.model.auth.User;
 import com.lagoinha.connect.util.Criptografia;
 import com.mongodb.client.result.DeleteResult;
 

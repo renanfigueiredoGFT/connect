@@ -3,9 +3,10 @@ package com.lagoinha.connect.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.lagoinha.connect.model.Connect;
-import com.lagoinha.connect.model.ConnectBracelet;
-import com.lagoinha.connect.model.Worship;
+import com.lagoinha.connect.model.connect.Connect;
+import com.lagoinha.connect.model.worship.ConnectBracelet;
+import com.lagoinha.connect.model.worship.Status;
+import com.lagoinha.connect.model.worship.Worship;
 import com.lagoinha.connect.util.Criptografia;
 import com.mongodb.client.result.DeleteResult;
 
@@ -99,6 +100,21 @@ public class WorshipService {
 			return false;
 		}
 		
+	}
+	
+	public List<Worship> closeAllWorships(){
+		List<Worship> worships =  mongoTemplate.findAll(Worship.class, COLLECTION);
+		for(Worship worship : worships) {
+			worship.setStatus(Status.ENCERRADO);
+			mongoTemplate.save(worship, COLLECTION);
+		}
+		return worships;
+	}
+	
+	public List<Worship> findOpenWorships(){
+		Query query = new Query(Criteria.where("status").is("ABERTO"));
+		List<Worship> worships =  mongoTemplate.find(query, Worship.class, COLLECTION);
+		return worships;
 	}
 	
 }

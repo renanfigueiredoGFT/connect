@@ -43,6 +43,9 @@
 			        <!-- <a class="nav-link" href="/user/index">User</a> -->
 			        <a class="nav-link" href="/connect/index">Connect</a>
 			        <a class="nav-link active" href="/worship/index">Cultos</a>
+			        <a class="nav-link" href="/voluntario/index">Voluntários</a>
+			        <a class="nav-link" href="/ministerio/index">Ministérios</a>
+			        <a class="nav-link" href="/escala/index">Escalas</a>
 			      </div>
 			    </div>
 			  </div>
@@ -65,7 +68,7 @@
 			    <div class="form-group">
 		    		<label for="status">Status</label>
 		    		<select class="form-control" th:field="*{status}" id="status">
-    					<option th:each="statusOpt : ${T(com.lagoinha.connect.model.Status).values()}" 
+    					<option th:each="statusOpt : ${T(com.lagoinha.connect.model.worship.Status).values()}" 
         					th:value="${statusOpt}" th:utext="${statusOpt}"></option>
 					</select>
 		    	</div>

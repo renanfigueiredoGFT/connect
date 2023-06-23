@@ -1,4 +1,4 @@
-package com.lagoinha.connect.model;
+package com.lagoinha.connect.model.auth;
 
 public class Token {
 
