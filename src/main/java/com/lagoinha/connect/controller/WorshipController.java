@@ -3,11 +3,11 @@ package com.lagoinha.connect.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.lagoinha.connect.model.Connect;
-import com.lagoinha.connect.model.ConnectBracelet;
-import com.lagoinha.connect.model.ConnectVisitor;
-import com.lagoinha.connect.model.Worship;
-import com.lagoinha.connect.model.WorshipConnect;
+import com.lagoinha.connect.model.connect.Connect;
+import com.lagoinha.connect.model.worship.ConnectBracelet;
+import com.lagoinha.connect.model.worship.ConnectVisitor;
+import com.lagoinha.connect.model.worship.Worship;
+import com.lagoinha.connect.model.worship.WorshipConnect;
 import com.lagoinha.connect.service.ConnectService;
 import com.lagoinha.connect.service.WorshipService;
 
@@ -40,7 +40,7 @@ public class WorshipController {
     public String showDetails(@PathVariable("id") String id, Model model) {
 	    Worship worship = worshipService.findById(id);
 	    model.addAttribute("worship", worship);
-	    return "worship/details";
+	    return "worship/details-worship";
     }
 	
 	@GetMapping("{id}/list-connect")
@@ -144,5 +144,12 @@ public class WorshipController {
 		worshipService.delete(id);
 		return "redirect:/worship/index";
 	}
+	
+	@GetMapping("closeAll")
+    public String closeAllWorships(Model model) {
+		List<Worship> worships = worshipService.closeAllWorships();
+		model.addAttribute("worships", worships);
+		return "worship/index";
+    }
 	
 }

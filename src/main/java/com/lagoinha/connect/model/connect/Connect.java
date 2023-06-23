@@ -1,6 +1,6 @@
-package com.lagoinha.connect.model;
+package com.lagoinha.connect.model.connect;
 
-import java.time.LocalDate;
+import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
 
@@ -42,5 +42,38 @@ public class Connect {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(name);
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Connect other = (Connect) obj;
+		if(name != null) {
+			name = name.toUpperCase();
+		}
+		if(other.name != null) {
+			other.name = other.name.toUpperCase();
+		}
+		return Objects.equals(name, other.name);
+	}
+	@Override
+	public String toString() {
+		return "Connect [id=" + id + ", name=" + name + ", birthDate=" + birthDate + ", responsible=" + responsible
+				+ ", phone=" + phone + "]";
+	}
+	
+	
+	
+	
+	
 	
 }

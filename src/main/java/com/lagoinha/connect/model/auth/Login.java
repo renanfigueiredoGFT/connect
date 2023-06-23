@@ -1,4 +1,4 @@
-package com.lagoinha.connect.model;
+package com.lagoinha.connect.model.auth;
 
 import org.springframework.data.annotation.Transient;
 

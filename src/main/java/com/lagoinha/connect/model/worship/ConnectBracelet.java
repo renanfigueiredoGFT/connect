@@ -1,4 +1,6 @@
-package com.lagoinha.connect.model;
+package com.lagoinha.connect.model.worship;
+
+import com.lagoinha.connect.model.connect.Connect;
 
 public class ConnectBracelet {
 

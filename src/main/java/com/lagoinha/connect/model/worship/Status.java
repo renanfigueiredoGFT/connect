@@ -1,4 +1,4 @@
-package com.lagoinha.connect.model;
+package com.lagoinha.connect.model.worship;
 
 public enum Status {
 	ABERTO,

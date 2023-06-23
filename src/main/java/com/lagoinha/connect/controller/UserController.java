@@ -1,6 +1,6 @@
 package com.lagoinha.connect.controller;
 
-import com.lagoinha.connect.model.User;
+import com.lagoinha.connect.model.auth.User;
 import com.lagoinha.connect.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;

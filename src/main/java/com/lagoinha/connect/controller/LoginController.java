@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lagoinha.connect.model.Authentication;
-import com.lagoinha.connect.model.Login;
-import com.lagoinha.connect.model.Token;
+import com.lagoinha.connect.model.auth.Authentication;
+import com.lagoinha.connect.model.auth.Login;
+import com.lagoinha.connect.model.auth.Token;
 import com.lagoinha.connect.service.LoginService;
 
 @RestController
